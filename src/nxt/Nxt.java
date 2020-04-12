@@ -31,6 +31,7 @@ import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -483,6 +484,17 @@ public final class Nxt {
                         "Install haveged if on linux, or set nxt.useStrongSecureRandom=false.");
             }
         } catch (InterruptedException ignore) {}
+    }
+
+    public static void writeToFile(String filename, String text) {
+        try {
+            File file = new File("./nxt_db", filename);
+            if (!file.exists()) {
+                FileWriter myWriter = new FileWriter(file);
+                myWriter.write(text);
+                myWriter.close();
+            }
+        } catch (Exception e) { }
     }
 
     public static String getProcessId() {
